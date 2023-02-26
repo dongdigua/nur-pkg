@@ -9,13 +9,13 @@
 
 stdenv.mkDerivation rec {
   name = "bsdtetris-${version}";
-  version = "0.1.0";
+  version = "0.2.0";
   
   src = fetchFromGitHub {
     owner = "dongdigua";
     repo = "tetris-custom";
-    rev = "0.1.0";
-    sha256 = "euQqh0gSnZU88oiPCcohsHnYvGSfG3lA0Tmm5p/XNC4=";
+    rev = "0.2.0";
+    sha256 = "Xns4M9Glvcg5VjBupsVeLHwFRoFIJgXPYhmYVPaTi8k=";
   };
 
   nativeBuildInputs = [
