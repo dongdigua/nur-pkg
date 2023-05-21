@@ -19,13 +19,13 @@ let
   };
 in stdenv.mkDerivation rec {
   pname = "w3m";
-  version = "0.5.3+git20220429";
+  version = "0.5.3+git20230121"; # fedora uses this version
 
   src = fetchFromGitHub {
     owner = "tats";
     repo = pname;
     rev = "v${version}";
-    hash = "sha256-aPPLZjjL3A5Tk0hv0NoAwJnjemC7a5RUoubhUr3lQE4=";
+    hash = "sha256-upb5lWqhC1jRegzTncIz5e21v4Pw912FyVn217HucFs=";
   };
 
   NIX_LDFLAGS = lib.optionalString stdenv.isSunOS "-lsocket -lnsl";
@@ -38,11 +38,16 @@ in stdenv.mkDerivation rec {
   makeFlags = [ "AR=${stdenv.cc.bintools.targetPrefix}ar" ];
 
   patches = [
-    ./RAND_egd.libressl.patch
+#    ./RAND_egd.libressl.patch
     (fetchpatch {
       name = "https.patch";
       url = "https://aur.archlinux.org/cgit/aur.git/plain/https.patch?h=w3m-mouse&id=5b5f0fbb59f674575e87dd368fed834641c35f03";
       sha256 = "08skvaha1hjyapsh8zw5dgfy433mw2hk7qy9yy9avn8rjqj7kjxk";
+    })
+    (fetchpatch {
+      name = "gemini.patch";
+      url = "https://rkta.de/assets/gemini.patch";
+      sha256 = "sha256-fudIekD+veKTdexwhuDfvTNXO5fQ5aYuqVivRDvLWg4=";
     })
   ];
 
@@ -86,7 +91,7 @@ in stdenv.mkDerivation rec {
 
   meta = with lib; {
     homepage = "http://w3m.sourceforge.net/";
-    description = "A text-mode web browser";
+    description = "A text-mode web browser (with gemini support)";
     maintainers = with maintainers; [ cstrahan anthonyroussel ];
     platforms = platforms.unix;
     license = licenses.mit;
