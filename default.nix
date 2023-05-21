@@ -17,6 +17,5 @@
   bsdtetris = pkgs.callPackage ./pkgs/bsdtetris { };
   ckman = pkgs.callPackage ./pkgs/canokey-manager { };
   cproc = pkgs.callPackage ./pkgs/cproc { };
-  # some-qt5-package = pkgs.libsForQt5.callPackage ./pkgs/some-qt5-package { };
-  # ...
+  w3m-gmi = pkgs.callPackage ./pkgs/w3m { };
 }
