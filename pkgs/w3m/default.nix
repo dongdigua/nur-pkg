@@ -1,6 +1,6 @@
 { lib, stdenv, fetchFromGitHub, fetchpatch
 , ncurses, boehmgc, gettext, zlib
-, sslSupport ? true, openssl
+, sslSupport ? true, libressl
 , graphicsSupport ? !stdenv.isDarwin, imlib2
 , x11Support ? graphicsSupport, libX11
 , mouseSupport ? !stdenv.isDarwin, gpm-ncurses
@@ -59,7 +59,7 @@ in stdenv.mkDerivation rec {
 
   nativeBuildInputs = [ pkg-config gettext ];
   buildInputs = [ ncurses boehmgc zlib ]
-    ++ lib.optional sslSupport openssl
+    ++ lib.optional sslSupport libressl
     ++ lib.optional mouseSupport gpm-ncurses
     ++ lib.optional graphicsSupport imlib2
     ++ lib.optional x11Support libX11;
@@ -71,7 +71,7 @@ in stdenv.mkDerivation rec {
   hardeningDisable = [ "format" ];
 
   configureFlags =
-    [ "--with-ssl=${openssl.dev}" "--with-gc=${boehmgc.dev}" ]
+    [ "--with-ssl=${libressl.dev}" "--with-gc=${boehmgc.dev}" ]
     ++ lib.optionals (stdenv.buildPlatform != stdenv.hostPlatform) [
       "ac_cv_func_setpgrp_void=yes"
     ]
