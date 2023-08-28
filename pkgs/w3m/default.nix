@@ -47,7 +47,7 @@ in stdenv.mkDerivation rec {
     (fetchpatch {
       name = "gemini.patch";
       url = "https://rkta.de/assets/gemini.patch";
-      sha256 = "sha256-fudIekD+veKTdexwhuDfvTNXO5fQ5aYuqVivRDvLWg4=";
+      sha256 = "sha256-BvIxpuLqIJYXPJt9boXBqlUQ8xmmzNPgXV5zokXce00=";
     })
   ];
 
